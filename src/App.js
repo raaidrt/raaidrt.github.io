@@ -1,5 +1,5 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import React from 'react';
+import React, { useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -31,6 +31,9 @@ const darkTheme = createTheme({
 });
 
 function App() {
+	useEffect(() => {
+		document.title = "Raaid Tanveer"
+	}, []);
 
 	return (<React.Fragment><ThemeProvider theme={darkTheme}>
 	<CssBaseline />
