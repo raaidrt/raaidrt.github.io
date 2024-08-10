@@ -32,7 +32,7 @@ If the question instead asked us to find the maximum profit we can make via _one
 
 \\(\mathsf{prefixSum} \gets 0\;\\)
 
-\\(\mathsf{minPrefixSum} 0\;\\)
+\\(\mathsf{minPrefixSum} \gets 0\;\\)
 
 \\(\mathsf{maxContiguousSubsequenceSum} \gets 0\;\\)
 
@@ -134,7 +134,9 @@ flowchart TD;
 ```
 The time it takes to get from the first step to the second is often very large, often exacerbated by the hacky solutions that people respond on online forums such as LeetCode discussion boards with. Most people also conflate the ideas of "small solutions" with "clean solutions", and one must be wary that the two are not always the same. If you have ever ventured into code golfing competitions, you will quickly find that the smallest solutions are often the most difficult to make sense of. 
 
-The way that this problem can be corrected is through biasing towards solutions based on prose instead of solutions based on actual code– the former makes it way easier and more approachable for newcomers to learn from.
+The way that this problem can be corrected is through biasing towards solutions based on prose instead of solutions based on actual code– the former makes it way easier and more approachable for newcomers to learn from. 
+
+In the spirit of allowing the readers to come up with details of the solution themselves, it is additionally better to communicate the key ideas through prose so that the readers can come up with the programmatic details themselves. The joy of being able to discover parts of a solution by oneself makes it more likely that problem solving techniques are stored in long-term memory.
 
 ## On Proofs
 The community online often seems averse to the ideas of learning from proving things rather than writing code. It must always be remembered that code without proof is as valuable as is gibberish. 
