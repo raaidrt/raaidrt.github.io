@@ -1,0 +1,15 @@
+{
+  "name": "webgpu-project",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "gl-matrix": "^3.4.3",
+    "katex": "^0.16.22"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

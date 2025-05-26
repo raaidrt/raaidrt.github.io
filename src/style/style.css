@@ -1,0 +1,8 @@
+body {
+  font-family: "Sans Serif";
+  background-image: url("../../resources/background.jpg");
+  background-size: cover;
+  padding: 20px;
+  padding-top: 5px;
+  font-size: 1.2rem;
+}
