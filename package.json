@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build"
   },
   "dependencies": {
     "gl-matrix": "^3.4.3",
-    "katex": "^0.16.22"
+    "katex": "^0.16.22",
+    "wgpu-matrix": "^3.3.0"
   },
   "devDependencies": {
-    "vite": "^5.0.0"
+    "vite": "^5.0.0",
+    "@webgpu/types": "^0.1.53"
   }
 }
