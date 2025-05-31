@@ -1,8 +1,6 @@
 body {
   background-color: #333333;
-  /* Dark Grey */
   color: #ffffff;
-  /* White */
   font-family: sans-serif;
   background-size: cover;
   padding: 20px;
@@ -18,5 +16,7 @@ a {
 canvas {
   display: block;
   margin: 20px auto;
+  width: 200px;
+  height: 200px;
   /* Adds some top/bottom margin and centers horizontally */
 }
