@@ -1,0 +1,19 @@
+# macOS-specific files
+.DS_Store
+
+# IDE settings
+.idea/
+.vscode/
+
+# Environment variables
+.env
+
+# Dependencies
+node_modules/
+
+# Bun
+bun.lock
+
+# Generated blog files
+public/blog/
+public/blog.html

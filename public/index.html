@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Software Engineer at Stripe. Building reliable systems at scale.">
+  <title>Raaid Tanveer</title>
+  <link rel="canonical" href="https://raaidtanveer.com/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Raaid Tanveer</a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="hero">
+        <div class="hero-content">
+          <img src="profile.png" alt="Raaid Tanveer" class="profile-picture">
+          <div class="hero-text">
+            <h1>Hey! I'm Raaid</h1>
+            <p class="hero-subtitle">
+              Currently working at <a href="https://stripe.com" target="_blank" rel="noopener noreferrer">Stripe</a>, building the infrastructure for public APIs and webhooks in the Production Engineering team. 
+
+              <br><br>
+              I am a Computer Science graduate from <a href="https://www.cmu.edu" target="_blank" rel="noopener noreferrer">Carnegie Mellon University</a>, with a concentration in Algorithms and Complexity, and a minor in Economics.
+            </p>
+            <div class="hero-links">
+              <a href="about.html" class="link-primary">More about me</a>
+              <a href="projects.html" class="link-secondary">View projects</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Recent Writing</h2>
+        <div class="post-list">
+          <article class="post-item">
+            <a href="blog/hello-world.html" class="post-link">
+              <h3>Hello World</h3>
+            </a>
+            <p class="post-description">Welcome to my blog. A place where I share thoughts on software engineering, distributed systems, and programming languages.</p>
+          </article>
+        </div>
+        <a href="blog.html" class="view-all">View all posts &rarr;</a>
+      </section>
+
+      <section class="section">
+        <h2>Featured Projects</h2>
+        <div class="project-grid">
+        <article class="project-card">
+          <h3>C0 Compiler</h3>
+          <p>A compiler for the C0 language targeting <code>x86_64</code> and LLVM IR, featuring SSA, register allocation via chordal graph coloring, and optimizations competitive with <code>gcc -O1</code>.</p>
+          <div class="project-card-links"><a href="projects/c0-compiler.html">Read more &rarr;</a></div>
+        </article>
+
+        <article class="project-card">
+          <h3>Tacopy</h3>
+          <p>A Python decorator that applies Tail Call Optimizations to tail-recursive functions, offering up to 2.88x speedup and <code>RecursionError</code> elimination.</p>
+          <div class="project-card-links"><a href="https://github.com/raaidrt/tacopy" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a></div>
+        </article>
+
+        <article class="project-card">
+          <h3>Proof: $\sqrt{2}$ is Irrational</h3>
+          <p>A formal proof that the square root of 2 is irrational, implemented in a proof assistant.</p>
+          <div class="project-card-links"><a href="https://github.com/raaidrt/irrational-sqrt-2" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a></div>
+        </article>
+        </div>
+        <a href="projects.html" class="view-all">View all projects &rarr;</a>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-content">
+        <p class="copyright">&copy; <span id="year"></span> Raaid Tanveer</p>
+        <nav class="social-links">
+          <a href="https://github.com/raaidrt" target="_blank" rel="noopener noreferrer" class="social-link">GitHub</a>
+          <a href="https://www.linkedin.com/in/raaidrt/" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
+          <a href="https://twitter.com/raaidrt" target="_blank" rel="noopener noreferrer" class="social-link">Twitter</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "raaid-website",
+  "type": "module",
+  "scripts": {
+    "build": "bun run scripts/build.ts",
+    "watch": "bun run scripts/build.ts --watch",
+    "serve": "bun run build && bun run scripts/serve.ts"
+  },
+  "devDependencies": {
+    "marked": "^15.0.0",
+    "gray-matter": "^4.0.3"
+  }
+}
