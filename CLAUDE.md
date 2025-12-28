@@ -31,7 +31,7 @@ Compiles all Markdown content into HTML:
 - Generates projects index at `public/projects.html`
 - Injects featured projects into `public/index.html`
 
-Uses `gray-matter` for frontmatter parsing and `marked` for Markdown conversion. Supports MathJax (LaTeX math) and Mermaid diagrams.
+Uses `gray-matter` for frontmatter parsing and `marked` for Markdown conversion. Supports KaTeX (LaTeX math) and Mermaid diagrams.
 
 ### `bun run watch`
 

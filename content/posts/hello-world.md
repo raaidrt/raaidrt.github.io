@@ -8,7 +8,7 @@ Welcome to my blog!
 
 I'm excited to be able to write about math, programming, and economics.
 
-This blog supports writing math through [MathJax](https://www.mathjax.org/), as shown below through Green's Theorem
+This blog supports writing math through [KaTeX](https://katex.org/) and rendering diagrams through [Mermaid](https://mermaid.js.org/), as shown below through Green's Theorem
 ```latex
 \oint_C (L \, dx + M \, dy) = \iint_D \left( \frac{\partial M}{\partial x} - \frac{\partial L}{\partial y} \right) dA
 ```
