@@ -8,12 +8,19 @@ A static personal website with a blog powered by Bun. Uses the **Everforest medi
 content/
 ├── posts/              # Blog post markdown files
 └── projects/           # Project markdown files
-public/
-├── blog/               # Generated blog post HTML (gitignored)
-├── projects/           # Generated project detail pages (expandable only)
-├── blog.html           # Generated blog index (gitignored)
+src/                    # Static source files
+├── about.html          # About page
+├── favicon.svg         # Favicon
+├── index.html          # Homepage template (with placeholders)
+├── profile.png         # Profile picture
+└── styles.css          # Stylesheets
+dist/                   # Generated output (gitignored)
+├── about.html          # Copied from src/
+├── blog/               # Generated blog post HTML
+├── blog.html           # Generated blog index
+├── projects/           # Generated project detail pages
 ├── projects.html       # Generated projects index
-└── index.html          # Homepage (featured projects injected here)
+└── index.html          # Generated from template
 scripts/
 ├── build.ts            # Main build script
 └── serve.ts            # Development server
@@ -25,11 +32,12 @@ scripts/
 
 Compiles all Markdown content into HTML:
 
-- Generates individual blog post pages in `public/blog/`
-- Generates blog index at `public/blog.html`
-- Generates project detail pages in `public/projects/` (for expandable projects)
-- Generates projects index at `public/projects.html`
-- Injects featured projects into `public/index.html`
+- Copies static files from `src/` to `dist/`
+- Generates individual blog post pages in `dist/blog/`
+- Generates blog index at `dist/blog.html`
+- Generates project detail pages in `dist/projects/` (for expandable projects)
+- Generates projects index at `dist/projects.html`
+- Generates `dist/index.html` from `src/index.html` template with featured projects and recent posts
 
 Uses `gray-matter` for frontmatter parsing and `marked` for Markdown conversion. Supports KaTeX (LaTeX math) and Mermaid diagrams.
 
@@ -69,8 +77,8 @@ Your content here...
 
 ### Blog Build Output
 
-- Individual post: `public/blog/{filename-without-extension}.html`
-- Blog index: `public/blog.html` (posts sorted by date, newest first)
+- Individual post: `dist/blog/{filename-without-extension}.html`
+- Blog index: `dist/blog.html` (posts sorted by date, newest first)
 
 ## Writing Projects
 
@@ -102,9 +110,9 @@ Optional detailed content (only rendered for expandable projects)...
 
 ### Project Build Output
 
-- Projects index: `public/projects.html` (sorted by `order`, then alphabetically)
-- Detail pages: `public/projects/{slug}.html` (only if `expandable: true`)
-- Featured projects are injected into the homepage `index.html`
+- Projects index: `dist/projects.html` (sorted by `order`, then alphabetically)
+- Detail pages: `dist/projects/{slug}.html` (only if `expandable: true`)
+- Featured projects are included in `dist/index.html` (generated from template)
 
 ### Project Card Behavior
 

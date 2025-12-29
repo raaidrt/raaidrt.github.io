@@ -1,12 +1,12 @@
 ---
 title: "Hello World"
-description: "Welcome to my blog. A place where I share thoughts on software engineering, distributed systems, and programming languages."
+description: "Welcome to my blog. A place where I share thoughts on math, programming, and economics."
 date: 2024-12-24
 ---
 
 Welcome to my blog!
 
-I'm excited to be able to write about math, programming, and economics.
+I'm excited to write about math, programming, and economics.
 
 This blog supports writing math through [KaTeX](https://katex.org/) and rendering diagrams through [Mermaid](https://mermaid.js.org/), as shown below through Green's Theorem
 ```latex

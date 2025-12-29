@@ -4,5 +4,5 @@ description: A Python decorator that applies Tail Call Optimizations to tail-rec
 github: https://github.com/raaidrt/tacopy
 featured: true
 expandable: false
-order: 2
+order: 1
 ---

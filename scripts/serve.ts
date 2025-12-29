@@ -3,7 +3,7 @@ import { join } from "path";
 import { existsSync } from "fs";
 
 const PORT = 8000;
-const PUBLIC_DIR = "./public";
+const PUBLIC_DIR = "./dist";
 
 serve({
   port: PORT,

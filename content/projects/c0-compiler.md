@@ -3,14 +3,14 @@ title: C0 Compiler
 description: A compiler for the C0 language targeting `x86_64` and LLVM IR, featuring SSA, register allocation via chordal graph coloring, and optimizations competitive with `gcc -O1`.
 featured: true
 expandable: true
-order: 1
+order: 2
 ---
 
 A fully-featured compiler for the [C0 language](https://c0.cs.cmu.edu/docs/c0-reference.pdf), a safe subset of C used for teaching at CMU. The compiler targets both `x86_64` directly and LLVM IR (enabling compilation to ARM and other architectures). With all optimizations enabled, the compiler achieves an average **1.74x speedup** on benchmark test cases.
 
 ## Pipeline Overview
 
-The compiler supports two backends: a native x86-64 backend and an LLVM IR backend for cross-platform compilation.
+The compiler supports two backends: a native `x86_64` backend and an LLVM IR backend for cross-platform compilation.
 
 <pre class="mermaid">
 flowchart LR

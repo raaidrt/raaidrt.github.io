@@ -1,13 +1,15 @@
 import { marked } from "marked";
 import matter from "gray-matter";
-import { readdir, readFile, writeFile, mkdir } from "fs/promises";
+import { readdir, readFile, writeFile, mkdir, cp } from "fs/promises";
 import { existsSync } from "fs";
 import { join } from "path";
 
 const POSTS_DIR = "./content/posts";
-const OUTPUT_DIR = "./public/blog";
 const PROJECTS_DIR = "./content/projects";
-const PROJECTS_OUTPUT_DIR = "./public/projects";
+const SRC_DIR = "./src";
+const DIST_DIR = "./dist";
+const OUTPUT_DIR = "./dist/blog";
+const PROJECTS_OUTPUT_DIR = "./dist/projects";
 
 interface PostFrontmatter {
   title: string;
@@ -134,7 +136,7 @@ function generateBlogIndexHtml(posts: Post[]): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Thoughts on software engineering, distributed systems, and programming languages.">
+  <meta name="description" content="A projection of my thoughts into text.">
   <title>Blog - Raaid Tanveer</title>
   <link rel="canonical" href="https://raaidtanveer.com/blog">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -164,7 +166,7 @@ function generateBlogIndexHtml(posts: Post[]): string {
       <header class="page-header">
         <h1>Blog</h1>
         <p class="page-description">
-          Thoughts on software engineering, distributed systems, compilers, and programming languages.
+          A projection of my thoughts onto text.
         </p>
       </header>
 
@@ -369,6 +371,19 @@ function generateFeaturedProjectsHtml(projects: Project[]): string {
   return featuredProjects.map(generateProjectCard).join("\n\n");
 }
 
+function generateRecentPostsHtml(posts: Post[], limit: number = 3): string {
+  const recentPosts = posts
+    .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
+    .slice(0, limit);
+
+  return recentPosts.map(post => `          <article class="post-item">
+            <a href="blog/${post.slug}.html" class="post-link">
+              <h3>${post.frontmatter.title}</h3>
+            </a>
+            <p class="post-description">${post.frontmatter.description}</p>
+          </article>`).join("\n");
+}
+
 async function buildProjects(): Promise<Project[]> {
   console.log("Building projects...");
 
@@ -415,33 +430,53 @@ async function buildProjects(): Promise<Project[]> {
 
   // Generate projects index
   const projectsIndexHtml = generateProjectsIndexHtml(projects);
-  await writeFile("./public/projects.html", projectsIndexHtml);
-  console.log("  Built: public/projects.html");
+  await writeFile("./dist/projects.html", projectsIndexHtml);
+  console.log("  Built: dist/projects.html");
 
   console.log(`  Processed ${projects.length} project(s).`);
   return projects;
 }
 
-async function updateIndexWithFeaturedProjects(projects: Project[]): Promise<void> {
-  const indexPath = "./public/index.html";
-  let indexContent = await readFile(indexPath, "utf-8");
+async function generateIndexHtml(posts: Post[], projects: Project[]): Promise<void> {
+  const templatePath = "./src/index.html";
+  let indexContent = await readFile(templatePath, "utf-8");
 
+  // Replace recent posts placeholder
+  const recentPostsHtml = generateRecentPostsHtml(posts);
+  indexContent = indexContent.replace("<!-- RECENT_POSTS -->", recentPostsHtml);
+
+  // Replace featured projects placeholder
   const featuredHtml = generateFeaturedProjectsHtml(projects);
+  indexContent = indexContent.replace("<!-- FEATURED_PROJECTS -->", featuredHtml);
 
-  // Replace the featured projects section
-  // Look for the project-grid div within the Featured Projects section
-  const featuredSectionRegex = /(<section class="section">\s*<h2>Featured Projects<\/h2>\s*<div class="project-grid">)([\s\S]*?)(<\/div>\s*<a href="projects\.html")/;
+  await writeFile("./dist/index.html", indexContent);
+  console.log("  Built: dist/index.html");
+}
 
-  indexContent = indexContent.replace(
-    featuredSectionRegex,
-    `$1\n${featuredHtml}\n        $3`
-  );
+async function copyStaticFiles(): Promise<void> {
+  console.log("Copying static files...");
 
-  await writeFile(indexPath, indexContent);
-  console.log("  Updated: public/index.html (Featured Projects)");
+  // Ensure dist directory exists
+  if (!existsSync(DIST_DIR)) {
+    await mkdir(DIST_DIR, { recursive: true });
+  }
+
+  // Copy static files from src to dist
+  const staticFiles = ["about.html", "favicon.svg", "profile.png", "styles.css"];
+  for (const file of staticFiles) {
+    const srcPath = join(SRC_DIR, file);
+    const destPath = join(DIST_DIR, file);
+    if (existsSync(srcPath)) {
+      await cp(srcPath, destPath);
+      console.log(`  Copied: ${destPath}`);
+    }
+  }
 }
 
 async function build() {
+  // Copy static files first
+  await copyStaticFiles();
+
   console.log("Building blog posts...");
 
   // Ensure output directory exists
@@ -479,18 +514,16 @@ async function build() {
 
   // Generate blog index
   const blogIndexHtml = generateBlogIndexHtml(posts);
-  await writeFile("./public/blog.html", blogIndexHtml);
-  console.log("  Built: public/blog.html");
+  await writeFile("./dist/blog.html", blogIndexHtml);
+  console.log("  Built: dist/blog.html");
 
   console.log(`Done! Built ${posts.length} post(s).\n`);
 
   // Build projects
   const projects = await buildProjects();
 
-  // Update homepage featured projects
-  if (projects.length > 0) {
-    await updateIndexWithFeaturedProjects(projects);
-  }
+  // Generate index.html from template
+  await generateIndexHtml(posts, projects);
 
   console.log("\nBuild complete!");
 }
