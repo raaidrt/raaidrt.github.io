@@ -8,7 +8,9 @@ Welcome to my blog!
 
 I'm excited to write about math, programming, and economics.
 
-This blog supports writing math through [KaTeX](https://katex.org/) and rendering diagrams through [Mermaid](https://mermaid.js.org/), as shown below through Green's Theorem
+This blog supports writing math through [KaTeX](https://katex.org/) and rendering diagrams through [Mermaid](https://mermaid.js.org/). 
+
+Below is a rendering of Green's Theorem to illustrate the math rendering capabilities.
 ```latex
 \oint_C (L \, dx + M \, dy) = \iint_D \left( \frac{\partial M}{\partial x} - \frac{\partial L}{\partial y} \right) dA
 ```
@@ -16,7 +18,7 @@ $$
 \oint_C (L \\, dx + M \\, dy) = \iint_D \left( \frac{\partial M}{\partial x} - \frac{\partial L}{\partial y} \right) dA
 $$
 
-And below is a deterministic finite automaton that recognizes the regular expression `(hello\s)+world`.
+And here is a deterministic finite automaton that recognizes the regular expression `(hello\s)+world`.
 <pre class="mermaid">
 flowchart LR
     start[ ] -->|" "| q0
