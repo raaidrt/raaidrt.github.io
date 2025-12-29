@@ -471,6 +471,40 @@ async function copyStaticFiles(): Promise<void> {
       console.log(`  Copied: ${destPath}`);
     }
   }
+
+  // Build animations directory (compile TS, copy shaders)
+  const animationsSrc = join(SRC_DIR, "animations");
+  const animationsDest = join(DIST_DIR, "animations");
+  if (existsSync(animationsSrc)) {
+    await mkdir(animationsDest, { recursive: true });
+
+    // Find all TypeScript files and compile them
+    const animationFiles = await readdir(animationsSrc);
+    const tsFiles = animationFiles.filter(f => f.endsWith(".ts"));
+    if (tsFiles.length > 0) {
+      const entrypoints = tsFiles.map(f => join(animationsSrc, f));
+      const result = await Bun.build({
+        entrypoints,
+        outdir: animationsDest,
+        format: "esm",
+      });
+      if (!result.success) {
+        console.error("  Failed to build animations:", result.logs);
+      } else {
+        for (const f of tsFiles) {
+          console.log(`  Built: ${join(animationsDest, f.replace(".ts", ".js"))}`);
+        }
+      }
+    }
+
+    // Copy shader files (.wgsl, .glsl, .vert, .frag)
+    const shaderExtensions = [".wgsl", ".glsl", ".vert", ".frag"];
+    const shaderFiles = animationFiles.filter(f => shaderExtensions.some(ext => f.endsWith(ext)));
+    for (const file of shaderFiles) {
+      await cp(join(animationsSrc, file), join(animationsDest, file));
+      console.log(`  Copied: ${join(animationsDest, file)}`);
+    }
+  }
 }
 
 async function build() {
