@@ -60,9 +60,7 @@ function generatePostHtml(post: Post): string {
   <link rel="canonical" href="https://raaidtanveer.com/blog/${post.slug}">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
@@ -141,9 +139,7 @@ function generateBlogIndexHtml(posts: Post[]): string {
   <link rel="canonical" href="https://raaidtanveer.com/blog">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
@@ -207,9 +203,7 @@ function generateProjectHtml(project: Project): string {
   <link rel="canonical" href="https://raaidtanveer.com/projects/${project.slug}">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
@@ -311,9 +305,7 @@ function generateProjectsIndexHtml(projects: Project[]): string {
   <link rel="canonical" href="https://raaidtanveer.com/projects">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
@@ -462,47 +454,13 @@ async function copyStaticFiles(): Promise<void> {
   }
 
   // Copy static files from src to dist
-  const staticFiles = ["about.html", "favicon.svg", "profile.png", "styles.css"];
+  const staticFiles = ["about.html", "favicon.svg", "profile.jpg", "styles.css"];
   for (const file of staticFiles) {
     const srcPath = join(SRC_DIR, file);
     const destPath = join(DIST_DIR, file);
     if (existsSync(srcPath)) {
       await cp(srcPath, destPath);
       console.log(`  Copied: ${destPath}`);
-    }
-  }
-
-  // Build animations directory (compile TS, copy shaders)
-  const animationsSrc = join(SRC_DIR, "animations");
-  const animationsDest = join(DIST_DIR, "animations");
-  if (existsSync(animationsSrc)) {
-    await mkdir(animationsDest, { recursive: true });
-
-    // Find all TypeScript files and compile them
-    const animationFiles = await readdir(animationsSrc);
-    const tsFiles = animationFiles.filter(f => f.endsWith(".ts"));
-    if (tsFiles.length > 0) {
-      const entrypoints = tsFiles.map(f => join(animationsSrc, f));
-      const result = await Bun.build({
-        entrypoints,
-        outdir: animationsDest,
-        format: "esm",
-      });
-      if (!result.success) {
-        console.error("  Failed to build animations:", result.logs);
-      } else {
-        for (const f of tsFiles) {
-          console.log(`  Built: ${join(animationsDest, f.replace(".ts", ".js"))}`);
-        }
-      }
-    }
-
-    // Copy shader files (.wgsl, .glsl, .vert, .frag)
-    const shaderExtensions = [".wgsl", ".glsl", ".vert", ".frag"];
-    const shaderFiles = animationFiles.filter(f => shaderExtensions.some(ext => f.endsWith(ext)));
-    for (const file of shaderFiles) {
-      await cp(join(animationsSrc, file), join(animationsDest, file));
-      console.log(`  Copied: ${join(animationsDest, file)}`);
     }
   }
 }
