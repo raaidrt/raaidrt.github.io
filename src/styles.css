@@ -499,23 +499,25 @@ tbody tr:last-child td {
   font-size: var(--text-base);
 }
 
-/* Project grid & cards --------------------------------------------------- */
+/* Project list — one project per row ------------------------------------- */
 .project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: var(--space-lg);
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card {
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
+  background: none;
+  border: none;
   border-radius: 0;
-  padding: var(--space-lg);
-  transition: border-color 0.15s ease;
+  padding: var(--space-lg) 0;
 }
 
-.project-card:hover {
-  border-color: var(--color-text);
+.project-card:first-child {
+  padding-top: 0;
+}
+
+.project-card + .project-card {
+  border-top: 1px solid var(--color-border-light);
 }
 
 .project-card h3 {
