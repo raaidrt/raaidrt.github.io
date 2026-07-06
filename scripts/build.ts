@@ -227,7 +227,7 @@ function generateProjectHtml(project: Project): string {
   <main>
     <div class="container">
       <article class="blog-post prose">
-        <h1>${project.frontmatter.title}</h1>
+        <h1>${marked.parseInline(project.frontmatter.title) as string}</h1>
         ${project.frontmatter.github ? `<p class="project-links"><a href="${project.frontmatter.github}" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a></p>` : ''}
 
         <div class="blog-post-content">
@@ -269,11 +269,13 @@ function generateProjectCard(project: Project): string {
     linkHtml = `<a href="${frontmatter.github}" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a>`;
   }
 
-  // Parse description as inline markdown to convert backticks to <code> tags
+  // Parse title and description as inline markdown (converts backticks to
+  // <code> and renders KaTeX math)
+  const titleHtml = marked.parseInline(frontmatter.title) as string;
   const descriptionHtml = marked.parseInline(frontmatter.description) as string;
 
   return `        <article class="project-card">
-          <h3>${frontmatter.title}</h3>
+          <h3>${titleHtml}</h3>
           <p>${descriptionHtml}</p>
           ${linkHtml ? `<div class="project-card-links">${linkHtml}</div>` : ''}
         </article>`;
