@@ -401,39 +401,6 @@ tbody tr:last-child td {
   gap: var(--space-xl);
 }
 
-/* Image and its attribution, side by side */
-.hero-figure {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: var(--space-lg);
-  margin: 0;
-}
-
-.profile-picture {
-  width: 300px;
-  height: auto;
-  border: 1px solid var(--color-border);
-  border-radius: 0;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.image-credit {
-  font-size: var(--text-sm);
-  line-height: var(--leading-normal);
-  color: var(--color-text-muted);
-}
-
-.image-credit p {
-  margin-bottom: var(--space-xs);
-}
-
-.image-credit .credit-title {
-  font-style: italic;
-  color: var(--color-text);
-}
-
 .hero-text {
   max-width: var(--max-width-prose);
 }
@@ -729,11 +696,6 @@ tbody tr:last-child td {
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--space-md);
-  }
-
-  .hero-figure {
-    flex-direction: column;
-    align-items: flex-start;
   }
 
   .hero-links {

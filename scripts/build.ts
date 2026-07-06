@@ -451,7 +451,7 @@ async function copyStaticFiles(): Promise<void> {
   }
 
   // Copy static files from src to dist
-  const staticFiles = ["about.html", "favicon.svg", "profile.jpg", "styles.css", "max-queens-vs-n.png"];
+  const staticFiles = ["about.html", "favicon.svg", "styles.css", "max-queens-vs-n.png"];
   for (const file of staticFiles) {
     const srcPath = join(SRC_DIR, file);
     const destPath = join(DIST_DIR, file);
