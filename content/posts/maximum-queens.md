@@ -9,7 +9,7 @@ date: 2026-07-05
 
 AI has not been used for writing any prose in this blogpost. AI has only been 
 used to help write the Python code that formulates the z3 constraints, and 
-for checking for bugs in my math.
+for checking for math bugs.
 
 </aside>
 
