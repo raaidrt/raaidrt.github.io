@@ -195,6 +195,33 @@ blockquote {
   font-style: italic;
 }
 
+/* Callout: a general foreword / aside, not a warning */
+.callout {
+  margin: var(--space-lg) 0;
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-bg-alt);
+  border-left: 3px solid var(--color-border);
+  border-radius: 0;
+}
+
+.callout > :first-child {
+  margin-top: 0;
+}
+
+.callout > :last-child {
+  margin-bottom: 0;
+}
+
+.callout-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+  margin-bottom: var(--space-xs);
+}
+
 hr {
   border: none;
   border-top: 1px solid var(--color-border);
@@ -616,6 +643,34 @@ tbody tr:last-child td {
   font-size: var(--text-xl);
 }
 
+/* Footnotes (marked-footnote output) */
+.footnotes {
+  margin-top: var(--space-2xl);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* Short footnote rule, as in LaTeX */
+.footnotes::before {
+  content: "";
+  display: block;
+  width: 33%;
+  border-top: 1px solid var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+.footnotes ol {
+  margin-bottom: 0;
+}
+
+.footnotes p {
+  font-size: inherit;
+}
+
+[data-footnote-backref] {
+  text-decoration: none;
+}
+
 /* Centered link line under a project detail title */
 .project-links {
   margin-bottom: var(--space-2xl);
@@ -694,4 +749,48 @@ tbody tr:last-child td {
 
 .mermaid .node .label {
   font-size: 12px;
+}
+
+/* Chessboard figure (blog) ------------------------------------------------ */
+.chessboard-figure {
+  margin: var(--space-xl) auto;
+  max-width: 28rem;
+  text-align: center;
+}
+
+/* <chess-board> (chessboard-element) renders its own squares/pieces/border in
+   a shadow root. It also appends a normal-flow drag layer one square tall below
+   the board; pin the host to a square and clip that overflow so there is no
+   trailing gap. The board draws its own 2px frame, so we add none here. */
+.chessboard-figure chess-board {
+  display: block;
+  width: 100%;
+  max-width: 24rem;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* Plot figure (blog) ------------------------------------------------------ */
+.plot-figure {
+  margin: var(--space-xl) auto;
+  max-width: 34rem;
+  text-align: center;
+}
+
+.plot-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid var(--color-border-light);
+}
+
+.chessboard-figure figcaption,
+.plot-figure figcaption {
+  margin-top: var(--space-sm);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-text-muted);
+  font-style: italic;
 }

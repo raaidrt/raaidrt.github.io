@@ -4,10 +4,13 @@
   "scripts": {
     "build": "bun run scripts/build.ts",
     "watch": "bun run scripts/build.ts --watch",
-    "serve": "bun run build && bun run scripts/serve.ts"
+    "serve": "bun run scripts/serve.ts"
   },
   "devDependencies": {
+    "gray-matter": "^4.0.3",
+    "katex": "^0.17.0",
     "marked": "^15.0.0",
-    "gray-matter": "^4.0.3"
+    "marked-footnote": "^1.4.0",
+    "marked-katex-extension": "^5.1.10"
   }
 }

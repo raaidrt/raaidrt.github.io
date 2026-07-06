@@ -39,7 +39,7 @@ Compiles all Markdown content into HTML:
 - Generates projects index at `dist/projects.html`
 - Generates `dist/index.html` from `src/index.html` template with featured projects and recent posts
 
-Uses `gray-matter` for frontmatter parsing and `marked` for Markdown conversion. Supports KaTeX (LaTeX math) and Mermaid diagrams.
+Uses `gray-matter` for frontmatter parsing and `marked` for Markdown conversion. KaTeX math is rendered at build time; Mermaid diagrams render client-side.
 
 ### `bun run watch`
 
@@ -120,6 +120,31 @@ Optional detailed content (only rendered for expandable projects)...
 - If `expandable: false` with `github`: Card links to GitHub
 - Both link types can coexist on expandable projects
 
+## Footnotes
+
+Footnotes use GitHub-style syntax via the `marked-footnote` extension:
+
+```markdown
+Some claim that needs a citation.[^1]
+
+[^1]: The footnote text. Continuation lines must be
+    indented by four spaces.
+```
+
+Footnotes render as a numbered list at the end of the post under a short
+horizontal rule (styled in `src/styles.css` under `.footnotes`).
+
+## Math (KaTeX)
+
+Math is rendered at build time via `marked-katex-extension` (with `nonStandard: true`), so write plain LaTeX with **no markdown escaping**:
+
+- Inline: `$s \in S$` — works mid-word too (`$n$-queens`)
+- Display: `$$\mathsf{id}_{\text{queen}, s} \in \{0, 1\}$$` — put display math in its own paragraph (blank line before and after)
+- Do **not** escape underscores (`\_`) or braces (`\\{`); the extension captures `$...$` spans before marked's emphasis/escape parsing runs
+- A literal dollar sign in prose must be escaped as `\$`
+
+Because rendering happens at build time, generated pages only need the KaTeX stylesheet (no client-side KaTeX JS). The static `src/index.html` and `src/about.html` pages are not processed by marked and still use client-side auto-render.
+
 ## Mermaid Diagrams
 
 Mermaid diagrams are rendered client-side via the Mermaid.js library. To include a diagram, use raw HTML with `<pre class="mermaid">` tags (not markdown code blocks):
@@ -137,4 +162,7 @@ flowchart LR
 ## Dependencies
 
 - `marked` - Markdown to HTML conversion
+- `marked-footnote` - GitHub-style footnote support for marked
+- `marked-katex-extension` - Build-time KaTeX math rendering
+- `katex` - LaTeX math typesetting (used by the extension)
 - `gray-matter` - YAML frontmatter parsing
